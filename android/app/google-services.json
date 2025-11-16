@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "761301281091",
+    "project_id": "chat-flutter-app-scholar-chat",
+    "storage_bucket": "chat-flutter-app-scholar-chat.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761301281091:android:5c0175794fb200bba0e7f6",
+        "android_client_info": {
+          "package_name": "com.example.scholar_chat_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGFBurikM0-JkKvAKdLYmnLoT1ZhwKKlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
