@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:scholar_chat_app/constants.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton({super.key, required this.txt , required this.onTap});
+  const CustomButton({super.key, required this.txt , required this.onTap});
   final String txt;
-  VoidCallback onTap;
+ final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

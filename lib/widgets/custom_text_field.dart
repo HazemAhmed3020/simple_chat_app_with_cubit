@@ -4,7 +4,7 @@ import 'package:scholar_chat_app/constants.dart';
 class CustomTextField extends StatelessWidget {
    CustomTextField({super.key, required this.hintTxt, required this.onChanged, this.showTxt = false});
   final String hintTxt;
-  Function(String) onChanged;
+ final Function(String) onChanged;
 
    bool showTxt;
   @override

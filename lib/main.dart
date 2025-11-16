@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scholar_chat_app/pages/chat_page.dart';
+import 'package:scholar_chat_app/pages/cubits/login/login_cubit.dart';
 import 'package:scholar_chat_app/pages/login_page.dart';
 import 'package:scholar_chat_app/pages/signup_page.dart';
 import 'firebase_options.dart';
@@ -23,9 +25,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(useMaterial3: false),
       routes: {
-        SignupPage.route : (context) => SignupPage(),
-        LoginPage.route : (context) => LoginPage(),
-        ChatPage.route : (context) => ChatPage(),
+        SignupPage.route: (context) => SignupPage(),
+        LoginPage.route: (context) => LoginPage(),
+        ChatPage.route: (context) => ChatPage(),
       },
       initialRoute: SignupPage.route,
     );
