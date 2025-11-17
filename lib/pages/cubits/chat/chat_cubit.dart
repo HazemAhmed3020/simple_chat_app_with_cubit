@@ -20,10 +20,13 @@ class ChatCubit extends Cubit<ChatState> {
   }
   void showMessages(){
     messages.orderBy('time', descending: true).snapshots().listen((value){
-      messageList.add(Messages.fromJson(value.docs));
-
+      messageList.clear();
+      for(var doc in value.docs){
+        messageList.add(Messages.fromJson(doc));
+      }
+      emit(ChatSuccess(messageList: messageList));
     });
-    emit(ChatSuccess(messageList: messageList));
+
   }
 
 

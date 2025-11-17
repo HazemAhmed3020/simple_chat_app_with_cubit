@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scholar_chat_app/pages/chat_page.dart';
+import 'package:scholar_chat_app/pages/cubits/chat/chat_cubit.dart';
+import 'package:scholar_chat_app/pages/cubits/login/login_cubit.dart';
+import 'package:scholar_chat_app/pages/cubits/signup/signup_cubit.dart';
 import 'package:scholar_chat_app/pages/login_page.dart';
 import 'package:scholar_chat_app/pages/signup_page.dart';
 import 'firebase_options.dart';
@@ -19,15 +23,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(useMaterial3: false),
-      routes: {
-        SignupPage.route: (context) => SignupPage(),
-        LoginPage.route: (context) => LoginPage(),
-        ChatPage.route: (context) => ChatPage(),
-      },
-      initialRoute: SignupPage.route,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => SignupCubit()),
+        BlocProvider(create: (context) => ChatCubit()),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(useMaterial3: false),
+        routes: {
+          SignupPage.route: (context) => SignupPage(),
+          LoginPage.route: (context) => LoginPage(),
+          ChatPage.route: (context) => ChatPage(),
+        },
+        initialRoute: SignupPage.route,
+      ),
     );
   }
 }

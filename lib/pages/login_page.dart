@@ -25,127 +25,124 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginCubit(),
-      child: BlocConsumer<LoginCubit, LoginState>(
-        listener: (context, state) {
-          if (state is LoginSuccess) {
-            showSnackBar(context, 'Success');
-            Navigator.pushNamed(
-              context,
-              ChatPage.route,
-              arguments: email,
-            );
-          }
-          else if (state is LoginFailure) {
-            showSnackBar(context, state.errMessage);
-          }
-        },
-        builder: (context, state) {
-          return ModalProgressHUD(
-            inAsyncCall: state is LoginLoading ? true : false,
-            child: Scaffold(
-              backgroundColor: kPrimaryColor,
-              body: Form(
-                key: formKey,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListView(
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          SizedBox(height: 180),
-                          Image.asset(
-                            'assets/images/scholar.png',
-                            width: 300,
-                            height: 80,
+    return BlocConsumer<LoginCubit, LoginState>(
+      listener: (context, state) {
+        if (state is LoginSuccess) {
+          showSnackBar(context, 'Success');
+          Navigator.pushNamed(
+            context,
+            ChatPage.route,
+            arguments: email,
+          );
+        }
+        else if (state is LoginFailure) {
+          showSnackBar(context, state.errMessage);
+        }
+      },
+      builder: (context, state) {
+        return ModalProgressHUD(
+          inAsyncCall: state is LoginLoading ? true : false,
+          child: Scaffold(
+            backgroundColor: kPrimaryColor,
+            body: Form(
+              key: formKey,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView(
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(height: 180),
+                        Image.asset(
+                          'assets/images/scholar.png',
+                          width: 300,
+                          height: 80,
+                        ),
+                        Text(
+                          'Scholar Chat',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Pacifico',
+                            color: vPrimaryColor,
                           ),
-                          Text(
-                            'Scholar Chat',
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'Pacifico',
-                              color: vPrimaryColor,
-                            ),
-                            textAlign: TextAlign.center,
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 30),
+                        Text(
+                          'Sign In',
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w400,
+                            color: vPrimaryColor,
                           ),
-                          SizedBox(height: 30),
-                          Text(
-                            'Sign In',
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w400,
-                              color: vPrimaryColor,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                          SizedBox(height: 20),
-                          CustomTextField(hintTxt: 'Email',
-                              onChanged: (data) {
-                                email = data;
-                              }
-                          ),
-                          SizedBox(height: 7),
-                          CustomTextField(
-                            showTxt: true,
-                            hintTxt: 'Password',
+                          textAlign: TextAlign.left,
+                        ),
+                        SizedBox(height: 20),
+                        CustomTextField(hintTxt: 'Email',
                             onChanged: (data) {
-                              password = data;
-                            },
-                          ),
-                          SizedBox(height: 12),
-                          CustomButton(
-                            txt: 'Sign In',
-                            onTap: () async {
-                              if (formKey.currentState!.validate()) {
+                              email = data;
+                            }
+                        ),
+                        SizedBox(height: 7),
+                        CustomTextField(
+                          showTxt: true,
+                          hintTxt: 'Password',
+                          onChanged: (data) {
+                            password = data;
+                          },
+                        ),
+                        SizedBox(height: 12),
+                        CustomButton(
+                          txt: 'Sign In',
+                          onTap: () async {
+                            if (formKey.currentState!.validate()) {
 
-                                  BlocProvider.of<LoginCubit>(context).loginAuth(
-                                      email: email!, password: password!);
-                              }
-                            },
-                          ),
-                          // SizedBox(height: 5,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "don't have an account?",
+                                BlocProvider.of<LoginCubit>(context).loginAuth(
+                                    email: email!, password: password!);
+                            }
+                          },
+                        ),
+                        // SizedBox(height: 5,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "don't have an account?",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: vPrimaryColor,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pushReplacementNamed(
+                                    context,
+                                    SignupPage.route,
+                                  ),
+                              child: Text(
+                                "Sign Up",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: vPrimaryColor,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pushReplacementNamed(
-                                      context,
-                                      SignupPage.route,
-                                    ),
-                                child: Text(
-                                  "Sign Up",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    color: vPrimaryColor,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
