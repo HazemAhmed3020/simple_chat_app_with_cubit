@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
             );
           }
           else if (state is LoginFailure) {
-            return showSnackBar(context, state.errMessage.substring(34));
+            showSnackBar(context, state.errMessage);
           }
         },
         builder: (context, state) {

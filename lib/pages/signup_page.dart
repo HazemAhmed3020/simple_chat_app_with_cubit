@@ -34,7 +34,7 @@ class _SignupPageState extends State<SignupPage> {
                 arguments: email);
           }
           else if (state is SignupFailure) {
-            return showSnackBar(context, state.errMessage.substring(37));
+            showSnackBar(context, state.errMessage);
           }
         },
         builder: (context, state) {
@@ -100,7 +100,6 @@ class _SignupPageState extends State<SignupPage> {
                                   BlocProvider.of<SignupCubit>(context)
                                       .signupAuth(
                                       email: email!, password: password!);
-
                                 }
                               }
                           ),
