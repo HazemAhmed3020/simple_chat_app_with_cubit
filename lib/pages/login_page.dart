@@ -19,7 +19,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool isLoaded = false;
+
   final GlobalKey<FormState> formKey = GlobalKey();
   String? email, password;
 
@@ -30,10 +30,15 @@ class _LoginPageState extends State<LoginPage> {
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
-            return showSnackBar(context, 'Success');
+            showSnackBar(context, 'Success');
+            Navigator.pushNamed(
+              context,
+              ChatPage.route,
+              arguments: email,
+            );
           }
           else if (state is LoginFailure) {
-            return showSnackBar(context, state.errMessage);
+            return showSnackBar(context, state.errMessage.substring(34));
           }
         },
         builder: (context, state) {
@@ -96,13 +101,9 @@ class _LoginPageState extends State<LoginPage> {
                             txt: 'Sign In',
                             onTap: () async {
                               if (formKey.currentState!.validate()) {
-                                BlocProvider.of<LoginCubit>(context).loginAuth(
-                                    email: email!, password: password!);
-                                Navigator.pushNamed(
-                                  context,
-                                  ChatPage.route,
-                                  arguments: email,
-                                );
+
+                                  BlocProvider.of<LoginCubit>(context).loginAuth(
+                                      email: email!, password: password!);
                               }
                             },
                           ),
@@ -152,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         elevation: 8,
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.all(10),
         backgroundColor: vPrimaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
