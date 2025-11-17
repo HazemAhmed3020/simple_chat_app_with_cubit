@@ -14,6 +14,11 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  @override
+  void initState() {
+   BlocProvider.of<ChatCubit>(context).showMessages();
+    super.initState();
+  }
   // final Stream<QuerySnapshot> messages = FirebaseFirestore.instance
   //     .collection('messages')
   //     .snapshots();
